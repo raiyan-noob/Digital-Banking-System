@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    printf("Bank Account System\n\nWelcome to Digital banking system!\n\n====================\n\n");
+    int n = 0;
+    int choice;
+    int transaction_history[365];
+    int amt;
+    int withdraw;
+    int transaction_cnt = 0;
+    while(1)
+    {
+        printf("1. Deposit Money\n2. Withdraw Money\n3. Check Balance\n4.View Transaction History\n5. Exit\n\nEnter your choice: ");
+        scanf("%d",&choice);
+        if(choice==1)
+        {
+            printf("Enter deposit amount: ");
+            scanf("%d",&amt);
+            printf("Amount successfully deposited\nUpdated Balance:$%d\n\n====================\n\n",n+amt);
+            n = n+amt;
+            transaction_history[transaction_cnt] = amt;
+            transaction_cnt++;
+        }
+        else if(choice==2)
+        {
+            printf("Enter withdrawal amount: ");
+            scanf("%d",&withdraw);
+            if(withdraw>n)
+                printf("Insufficient funds! Transaction failed.\n\n====================\n\n");
+            else
+            {
+                printf("Amount successfully withdrawn!\nUpdated balance:$%d\n\n====================\n\n",n-withdraw);
+                n = n-withdraw;
+                transaction_history[transaction_cnt] = -withdraw;
+                transaction_cnt++;
+            }
+        }
+        else if(choice == 3)
+        {
+            printf("Current Balance: $%d\n\n====================\n\n",n);
+        }
+        else if(choice==4)
+        {
+            printf("Transaction History: \n\n===================\n\n");
+            for(int i=0; i<transaction_cnt; i++)
+            {
+                if(transaction_history[i] >= 0)
+                    printf("Deposit: +$%d\n",transaction_history[i]);
+                else
+                    printf("Withdrawal: -$%d\n",-transaction_history[i]);
+            }
+        }
+        else if(choice == 5)
+        {
+            printf("Exiting the system...\nThank you for using our banking service, Have a nice day!\n\n====================\n");
+            break;
+        }
+        else
+        {
+            printf("Invalid Choice, please TRY AGAIN!\n");
+
+        }
+
+    }
+}
